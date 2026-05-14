@@ -1,0 +1,13 @@
+# Ambiente virtual
+venv/
+
+# Secrets — nunca colocar no GitHub
+.streamlit/secrets.toml
+
+# Ficheiros Python compilados
+__pycache__/
+*.pyc
+
+# Ficheiros do sistema
+.DS_Store
+Thumbs.db

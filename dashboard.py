@@ -26,11 +26,9 @@ st.set_page_config(
 
 @st.cache_resource
 def get_engine():
-    return create_engine(
-        "postgresql+psycopg2://postgres:Muiambo2002@localhost:5432/nexcart_dw"
-    )
-
-engine = get_engine()
+    db = st.secrets["database"]
+    url = f"postgresql+psycopg2://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}"
+    return create_engine(url)
 
 # ============================================================
 # CARREGAMENTO DE DADOS
