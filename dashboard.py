@@ -8,7 +8,7 @@ st.set_page_config(page_title="NexCart Analytics", page_icon="🛒", layout="wid
 @st.cache_resource
 def get_engine():
     db = st.secrets["database"]
-    url = f"postgresql+psycopg2://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}"
+    url = f"postgresql+psycopg2://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?sslmode=require"
     return create_engine(url)
 
 @st.cache_data
