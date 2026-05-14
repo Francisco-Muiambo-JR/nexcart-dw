@@ -29,7 +29,7 @@ def get_engine():
     db = st.secrets["database"]
     url = f"postgresql+psycopg2://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}"
     return create_engine(url)
-
+git add .
 # ============================================================
 # CARREGAMENTO DE DADOS
 # ============================================================
