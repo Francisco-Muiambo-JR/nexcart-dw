@@ -6,19 +6,12 @@ from urllib.parse import quote_plus
 
 st.set_page_config(page_title="NexCart Analytics", page_icon="🛒", layout="wide")
 
-@st.cache_resource
+@st.cache_resource(ttl=0)
 def get_engine():
-    db = st.secrets["database"]
-
-    password = quote_plus(db["password"])
-
-    url = (
-        f"postgresql+psycopg2://"
-        f"{db['user']}:{password}"
-        f"@{db['host']}:{db['port']}/{db['database']}"
-        f"?sslmode=require"
-    )
-
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+    url = os.getenv("DATABASE_URL")
     return create_engine(url)
 
 try:
