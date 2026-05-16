@@ -2,14 +2,31 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine
+from urllib.parse import quote_plus
 
 st.set_page_config(page_title="NexCart Analytics", page_icon="🛒", layout="wide")
 
 @st.cache_resource
 def get_engine():
     db = st.secrets["database"]
-    url = f"postgresql+psycopg2://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?sslmode=require"
+
+    password = quote_plus(db["password"])
+
+    url = (
+        f"postgresql+psycopg2://"
+        f"{db['user']}:{password}"
+        f"@{db['host']}:{db['port']}/{db['database']}"
+        f"?sslmode=require"
+    )
+
     return create_engine(url)
+
+try:
+    engine = get_engine()
+    with engine.connect() as conn:
+        st.success("Base de dados conectada com sucesso!")
+except Exception as e:
+    st.error(f"Erro de conexão: {e}")
 
 @st.cache_data
 def load_dados(_engine):
