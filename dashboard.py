@@ -11,7 +11,7 @@ def get_engine():
     import os
     from dotenv import load_dotenv
     load_dotenv()
-    url = os.getenv("DATABASE_URL")
+    url = os.getenv("DATABASE_URL") or st.secrets.get("DATABASE_URL")
     return create_engine(url)
 
 try:
