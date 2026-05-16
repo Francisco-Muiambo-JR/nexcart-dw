@@ -17,7 +17,11 @@ def get_engine():
 try:
     engine = get_engine()
     with engine.connect() as conn:
-        st.success("Base de dados conectada com sucesso!")
+        placeholder = st.empty()
+        placeholder.success("Base de dados conectada com sucesso!")
+        import time
+        time.sleep(2)
+        placeholder.empty()
 except Exception as e:
     st.error(f"Erro de conexão: {e}")
 
